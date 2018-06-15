@@ -24,15 +24,16 @@ from string import punctuation
 from nltk.probability import FreqDist
 import numpy as np
 import re
-
+import time
 
 #duas variaveis globais (serão utilizadas na função treino e teste)
 palavras = []
 labels = []
 
 def treino():
+    print("Treinando...")
     #lê o arquivo (treina com 7000 palavras)
-    dataset = pd.read_csv('tweets4.csv')
+    dataset = pd.read_csv('tweets.csv')
 
     #busca o que são tweets e o que são classes
     tweets = dataset['Text'].values
@@ -134,20 +135,39 @@ def treino():
             labels.append("Negativo")
         else:
             labels.append("Neutro")
-    print(palavras)
+    
     #print(labels)
+    print("Treino finalizado.")
     return
 
 def teste():
+    
+    start_time = time.time()
+    
+    print("Testando...\n")
+    #lê o arquivo (treina com 7000 palavras)
+    dataset = pd.read_csv('treino.csv')
 
-    #esperado = [pos, neg, pos, neg, neutr]
-    #vetor de testes
-    teste = ['dog love love love bad', 'bad bad house', 'dog dog house house bad', 'bad', 'bad bad house house']
-    #resultado
+    #busca o que são tweets e o que são classes
+    teste = dataset['Text'].values
+    #vetor de resultados esperados
+    classes = dataset['Classificacao'].values
+    #vetor de resultados reais
     resultado = []
-   
+    contador = 0
+    #falsos positivos, falsos negativos, true positivos, true negativos
+    fp = 0
+    fn = 0
+    tp = 0
+    tn = 0
+    
     #percorre cada frase do teste
     for frase in teste:
+        
+        contador += 1
+        
+        print("Categorizadas ", contador, " frases.")
+        
         #contador de palavras positivas nessa frase
         cont_pos = 0
         
@@ -195,13 +215,38 @@ def teste():
             resultado.append("Negativo")
         else:
             resultado.append("Neutro")
+
+    #verifica falsos positivos, falsos negativos e calcula a precisão do método
+    '''for index, res in enumerate(resultado):
+        if (res == "Positivo") and (res == classes[index]):
+            tp += 1
+        elif (res == "Positivo") and (res != classes[index]):
+            fp += 1
+        elif (res == "Negativo") and (res == classes[index]):
+            tn += 1
+        elif (res == "Negativo") and (res != classes[index]):
+            fn += 1'''
+    
+        
+    
+    print("Testes finalizados.")
+    
+    print("Tempo de execução: %s segundos" % (time.time() - start_time))
+
+    a = np.array(resultado)
+    b = np.array(classes)
+    print(classes)
     print(resultado)
+    print(len(classes))
+
+    print((a == b).sum())
+
     return
+
 
 treino()
 teste()
     
-
 #    print("Palavra: ", palavra)
  #   print("Prob. Pos: ", prob_positiva)
   #  print("Prob. Neg: ", prob_negativa, "\n")
