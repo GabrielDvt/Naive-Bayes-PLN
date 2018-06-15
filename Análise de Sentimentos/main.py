@@ -34,11 +34,11 @@ def treino():
     print("Treinando...")
     #lê o arquivo (treina com 7000 palavras)
     dataset = pd.read_csv('tweets.csv')
-
+    
     #busca o que são tweets e o que são classes
     tweets = dataset['Text'].values
     classes = dataset['Classificacao'].values
-
+    
     #lista que irá conter as palavras, os positivos, negativos e nêutros
     global palavras
     negativas = []
@@ -145,13 +145,17 @@ def teste():
     start_time = time.time()
     
     print("Testando...\n")
-    #lê o arquivo (treina com 7000 palavras)
-    dataset = pd.read_csv('treino.csv')
+    
+    dataset = pd.read_csv('tweets.csv')
+
+    #pega 1700 frases aleatórias
+    sample = dataset.sample(n=1700)
 
     #busca o que são tweets e o que são classes
-    teste = dataset['Text'].values
+    teste = sample['Text'].values
     #vetor de resultados esperados
-    classes = dataset['Classificacao'].values
+    classes = sample['Classificacao'].values
+    
     #vetor de resultados reais
     resultado = []
     contador = 0
@@ -235,11 +239,10 @@ def teste():
 
     a = np.array(resultado)
     b = np.array(classes)
-    print(classes)
-    print(resultado)
-    print(len(classes))
 
-    print((a == b).sum())
+    print("Total de tweets verificados: " ,len(resultado))
+    print("Acerto: ", ((a == b).sum() * 100 / len(resultado)), "%")
+    print("Erros: ", ((a != b).sum() * 100 / len(resultado)), "%")
 
     return
 
