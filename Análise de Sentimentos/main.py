@@ -16,12 +16,8 @@
 ##
 '''
 
-import nltk
 import pandas as pd
-from nltk import word_tokenize
-from nltk.corpus import stopwords
 from string import punctuation
-from nltk.probability import FreqDist
 import numpy as np
 import re
 import time
