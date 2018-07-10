@@ -29,7 +29,7 @@ def treino():
     start_time = time.time()
     print("Treinando...")
     #lê o arquivo (treina com 7000 de um total de 8900 linhas)
-    dataset = pd.read_csv('tweets.csv', nrows=7000)
+    dataset = pd.read_csv('tweets4.csv')
     
     #busca o que são tweets e o que são classes
     tweets = dataset['Text'].values
@@ -154,8 +154,8 @@ def treino():
             labels.append("Neutro")
 
         #print("Palavra: ", palavra, "\n P(pos) = " , fracao_positiva, "\n P(neg) = ", fracao_negativa, "\n P('palavra'): ", probabilidades[index], "\n P(pos|'palavra'): ", porcentagem_positiva, "\n P(neg|'palavra'): ", porcentagem_negativa)
-    
-    #print(labels)
+    print(palavras)
+    print(labels)
     '''print("Treino finalizado.")
     print('positivos', total_positivos)
     print('negativos', total_negativos)

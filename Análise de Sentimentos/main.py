@@ -26,7 +26,9 @@ palavras = []
 labels = []
 
 def treino():
+    start_time = time.time()
     print("Treinando...")
+    
     #lê o arquivo (treina com 7000 de um total de 8900 linhas)
     dataset = pd.read_csv('tweets.csv', nrows=7000)
     
@@ -151,9 +153,14 @@ def treino():
             labels.append("Negativo")
         else:
             labels.append("Neutro")
-    
-    #print(labels)
+            
     print("Treino finalizado.")
+    print('Total de palavras positivas: ', total_positivos)
+    print('Total de palavras negativas: ', total_negativos)
+    print('Total de palavras neutras: ', total_neutros)
+    print('Total de paalvras classificadas: ', total_positivos + total_negativos + total_neutros)
+    print("Tempo de execução: %s segundos" % (time.time() - start_time))
+    
     return
 
 def teste():
@@ -266,7 +273,7 @@ def teste():
     
 
 treino()
-teste()
+#teste()
     
 #    print("Palavra: ", palavra)
  #   print("Prob. Pos: ", prob_positiva)
