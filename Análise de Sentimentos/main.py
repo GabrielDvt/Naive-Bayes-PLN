@@ -273,7 +273,7 @@ def teste():
     
 
 treino()
-#teste()
+teste()
     
 #    print("Palavra: ", palavra)
  #   print("Prob. Pos: ", prob_positiva)
