@@ -509,17 +509,12 @@ twoside
 	
 	A primeira modificação foi adicionar um peso para cada palavra, ou seja, atribuir a ela o \emph{quanto} é positiva, negativa ou neutra, levando em consideração a frequência com que esta palavra aparece em cada uma dessas classificações. 
 	
-	Este "peso" nada mais é do que a divisão da frequência com que esta palavra aparece como positiva, negativa ou neutra dividida pelo total de palavras positivas, negativas ou neutras, respectivamente. Este peso será contabilizado na instância de teste, de tal forma que cada palavra tenha uma contribuição numérica e a soma das contribuições positivas, negativas ou neutras de todas as palavras da frase irão determinar a sua classificação.
+	Este "peso"  nada mais é do que a divisão da frequência com que esta palavra aparece como positiva, negativa ou neutra dividida pelo total de palavras positivas, negativas ou neutras, respectivamente. Este peso será contabilizado na instância de teste, de tal forma que cada palavra tenha uma contribuição numérica e a soma das contribuições positivas, negativas ou neutras de todas as palavras da frase irão determinar a sua classificação.
 	
-	Para exemplificar este modelo, podemos tomar como base os dados da tabela \ref{tab: baseDados1} e criar uma tabela de pesos (\ref{tab: tabfreq2}).
 	
-	Lembrando que o cálculo do peso segue a seguinte equação:
-	
-	\begin{equation}
-		Peso = \frac{P(positiva|palavra)}{P(positiva)}
-	\end{equation}
-	
-	\begin{table}[h]
+	Utilizando a tabela de frequências (\ref{tab: tabelaFrequencia}) e a equação Naive Bayes (\ref{eq: equacaoNaiveBayes}), chegamos à tabela de classificação (\ref{tab: labels}), exatamente igual ao método anterior. Porém, agora, a diferença é que temos uma tabela adicional: a tabela de pesos (\ref{tab: tabfreq2}).
+ 
+	\begin{table}[!h]
 		\caption{Tabela de frequência com o peso de cada palavra}
 		\label{tab: tabfreq2}
 		\centering
@@ -537,42 +532,52 @@ twoside
 			\hline
 			
 		\end{tabular}
-		
 	\end{table}
 
-	O que percebemos com a tabela \ref{tab: tabfreq2} é que a palavra "amor" é "mais positiva" do que a palavra "casa", por exemplo. Apesar de ambas serem positivas, existe um peso maior na palavra "amor" e este peso será levado em consideração no treino.
+    Lembrando que o cálculo do peso segue a seguinte equação:
+	
+	\begin{equation}
+	Peso = \frac{P(positiva|palavra)}{\sum(positivas)}
+	\end{equation}
+	
+	O que percebemos com a tabela \ref{tab: tabfreq2} é que a palavra "amor"  é "mais positiva"  do que a palavra "casa", por exemplo. Apesar de ambas serem positivas, existe um peso maior na palavra "amor" e este peso será levado em consideração no treino.
 
-	Agora, suponhamos a seguinte sentença de teste:
+	Lembrando que devemos ignorar o peso negativo e neutro da palavra, caso ela já tenha sido classificada como positiva. Ignorar o peso positivo e neutro caso ela tenha sido classificada como negativa. E ignorar os pesos positivo e negativo caso ela seja neutra.
+	 
+	
+	Como exemplo, suponhamos a seguinte sentença de teste:
 	\begin{quote}
 		"cachorro amor mau gato amor"
 	\end{quote}
     
-    Gostaríamos de determinar se essa frase é positiva ou negativa.
     
-    Não faremos mais o uso da equação \ref{eq: equacaoNaiveBayes}. Apenas montaremos uma tabela comparando os pesos de cada uma das palavras da sentença na instância de teste.
-    
-    
-		\begin{table}[h]
-		\caption{Tabela}
+	\begin{table}[!h]
+		\caption{Palavra, classificação e soma dos pesos}
 		\label{tab: tabfreq3}
 		\centering
 		
-		\begin{tabular}{|c|c|c|} \hline
-			\textbf{Palavra} & \textbf{Peso (pos)} & \textbf{Peso (neg)}\\
+		\begin{tabular}{|c|c|c|c|} \hline
+			\textbf{Palavra} & \textbf{Classificação} & \textbf{Peso (pos)} & \textbf{Peso (neg)}\\
 			\hline
-			cachorro & 0.25 & 0\\
-			amor & 0.38 & 0.33\\
-			mau & 0 & 0.16\\
-			gato & 0.13 & 0.5\\
-			amor & 0.38 & 0.33\\
+			cachorro & Positivo & 0.25 & -\\
+			amor & Positivo & 0.38 & - \\
+			mau & Negativo & - & 0.16\\
+			gato & Negativo & - & 0.5\\
+			amor & Positivo & 0.38 & -\\
 			\hline
-			Total & 1.14 & 1.32 \\
+			Somatório & - & 1.01 & 0.66 \\
 			\hline
 			
 		\end{tabular}
 		
 	\end{table}	
 	
+	Perceba, na tabela \ref{tab: tabfreq3}, que quando uma palavra é positiva, nós devemos levar em consideração apenas o peso positivo desta palavra. 
+	
+	O somatório dos pesos positivos foram maiores do que dos pesos negativos. 
+	Logo, esta sentença é considerada positiva.
+	
+	A diferença deste método para o outro é que talvez uma palavra seja tão negativa que acabe compensando um número maior de palavras positivas com pesos menores e faça uma sentença com um grande número de palavras positivas se tornar negativa devido ao peso desta palavra.
 	
 	% ----------------------------------------------------------
 	% Referências bibliográficas
