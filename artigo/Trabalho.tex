@@ -580,7 +580,10 @@ twoside
 	A diferença deste método para o outro é que talvez uma palavra seja tão negativa que acabe compensando um número maior de palavras positivas com pesos menores e faça uma sentença com um grande número de palavras positivas se tornar negativa devido ao peso desta palavra.
 	
 	\subsection{Resultados}
-	Fizemos essa modificação no nosso algoritmo e, novamente, o executamos 10 vezes.
+	Fizemos essa modificação no nosso algoritmo. A figura \ref{fig: melhoria1} mostra o resultado da primeira execução do novo algoritmo. Percebemos que o índice de acerto aumentou significativamente, quando comparado ao outro método.
+	
+	Novamente, iremos executar este algoritmo algumas vezes para tirarmos uma média de acertos, erros e tempo de execução.
+	
 	\begin{figure}[h!]
 		\centering
 		\caption{Execução da parte de treino do algoritmo melhorado}
@@ -588,6 +591,39 @@ twoside
 		\fonte{Próprio autor}
 		\label{fig: melhoria1}
 	\end{figure}
+
+
+		\begin{figure}[h!]
+		\centering
+		\caption{Execução de um dos testes}
+		\includegraphics[scale=1]{teste1.png}
+		\fonte{Próprio autor}
+		\label{fig: teste1}
+	\end{figure}
+	
+	\begin{table}[!h]
+		\caption{Resultados dos testes realizados com o algoritmo melhorado}
+		\label{tab: testes2}
+		\centering
+		
+		\begin{tabular}{|c|c|c|c|} \hline
+			\textbf{Teste} & \textbf{Acertos \%} & \textbf{Erros \%} & \textbf{Tempo(s)\%} \\
+			\hline
+			1 & 88.53 & 11.47 & 12.71\\
+			2 & 88.47 & 11.52 & 13.00\\
+			3 & 88.47 & 11.52 & 12.66 \\
+			4 & 90.00 & 10.00 & 14.30 \\
+			5 & 90.35 & 9.64 & 14.57 \\
+			
+			\hline
+			Média & 89.15 & 10.83 & 13.44\\
+			\hline
+			
+		\end{tabular}
+		
+	\end{table}
+	
+	
 	
 	% ----------------------------------------------------------
 	% Referências bibliográficas

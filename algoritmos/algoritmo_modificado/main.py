@@ -223,18 +223,18 @@ def teste():
                 
             
             #caso a palavra não exista no treino, então devemos atribuir a ela o valor de maior frequência no treino
-            #else:
+            else:
                 #conta quantas são positivas
-                #qtde_pos = labels.count("Positivo")
-                #conta quantas são negativas
-                #qtde_neg = labels.count("Negativo")
+                qtde_pos = labels.count("Positivo")
+                conta quantas são negativas
+                qtde_neg = labels.count("Negativo")
 
-                #if (qtde_pos > qtde_neg):
-                 #   cont_pos += 1
-                #elif (qtde_neg > qtde_pos):
-                #    cont_neg += 1
-                #else:
-                 #   cont_neu += 1
+                if (qtde_pos > qtde_neg):
+                    cont_pos += 1
+                elif (qtde_neg > qtde_pos):
+                    cont_neg += 1
+                else:
+                    cont_neu += 1
                 
         #verifica os contadores e decide se a frase é pos, neg, ou neu
         if (soma_pesos_pos > soma_pesos_neg and soma_pesos_pos > soma_pesos_neu):
@@ -264,27 +264,3 @@ teste()
 
 
 
-'''print('positivos', total_positivos)
-print('negativos', total_negativos)
-print('neutros', total_neutros)
-print('fracao_positiva', fracao_positiva)
-print('fracao_negativa', fracao_negativa)
-print('Vetor de probabilidades: ', probabilidades)'''
-
-'''for index, res in enumerate(resultado):
-        if (res == "Positivo") and (res == classes[index]):
-            tp += 1
-        elif (res == "Positivo") and (res != classes[index]):
-            fp += 1
-        elif (res == "Negativo") and (res == classes[index]):
-            tn += 1
-        elif (res == "Negativo") and (res != classes[index]):
-            fn += 1'''
-
-'''
-Melhorias:
-Palavras que não são conhecidas no teste poderiam entrar na base de dados e irão receber a classificação da frase que gerou esta palavra
-Implementar utilizando dicionários ao invés de utilizar arrays: melhoria na performance do método
-Problema: dificuldade na implementação
-'''
-        
