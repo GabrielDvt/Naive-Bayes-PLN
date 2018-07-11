@@ -505,9 +505,73 @@ twoside
 		
 	\section{Melhorias no método}
 	\label{melhorias}
-	Ao longo do desenvolvimento deste algoritmo e deste artigo, percebemos que poderíamos fazer algumas modificações para melhorarmos o nosso modelo e torná-lo mais real e mais aplicável.
+	Ao longo do desenvolvimento deste algoritmo e deste artigo, percebemos que poderíamos fazer algumas modificações para melhorarmos o nosso modelo e torná-lo mais real e aplicável.
 	
-	A primeira modificação foi  
+	A primeira modificação foi adicionar um peso para cada palavra, ou seja, atribuir a ela o \emph{quanto} é positiva, negativa ou neutra, levando em consideração a frequência com que esta palavra aparece em cada uma dessas classificações. 
+	
+	Este "peso" nada mais é do que a divisão da frequência com que esta palavra aparece como positiva, negativa ou neutra dividida pelo total de palavras positivas, negativas ou neutras, respectivamente. Este peso será contabilizado na instância de teste, de tal forma que cada palavra tenha uma contribuição numérica e a soma das contribuições positivas, negativas ou neutras de todas as palavras da frase irão determinar a sua classificação.
+	
+	Para exemplificar este modelo, podemos tomar como base os dados da tabela \ref{tab: baseDados1} e criar uma tabela de pesos (\ref{tab: tabfreq2}).
+	
+	Lembrando que o cálculo do peso segue a seguinte equação:
+	
+	\begin{equation}
+		Peso = \frac{P(positiva|palavra)}{P(positiva)}
+	\end{equation}
+	
+	\begin{table}[h]
+		\caption{Tabela de frequência com o peso de cada palavra}
+		\label{tab: tabfreq2}
+		\centering
+		
+		\begin{tabular}{|c|c|c|c|c|} \hline
+			\textbf{Palavra} & \textbf{Positivo} & \textbf{Negativo} & \textbf{Peso (pos)} & \textbf{Peso (neg)}\\
+			\hline
+			cachorro & 2 & 0 & 0.25 & 0\\
+			amor & 3 & 2 & 0.38 & 0.33\\
+			mau & 0 & 1 & 0 & 0.16\\
+			gato & 1 & 3 & 0.13 & 0.5\\
+			casa & 2 & 0 & 0.25 & 0\\
+			\hline
+			Total & 8 & 6  & - & - \\
+			\hline
+			
+		\end{tabular}
+		
+	\end{table}
+
+	O que percebemos com a tabela \ref{tab: tabfreq2} é que a palavra "amor" é "mais positiva" do que a palavra "casa", por exemplo. Apesar de ambas serem positivas, existe um peso maior na palavra "amor" e este peso será levado em consideração no treino.
+
+	Agora, suponhamos a seguinte sentença de teste:
+	\begin{quote}
+		"cachorro amor mau gato amor"
+	\end{quote}
+    
+    Gostaríamos de determinar se essa frase é positiva ou negativa.
+    
+    Não faremos mais o uso da equação \ref{eq: equacaoNaiveBayes}. Apenas montaremos uma tabela comparando os pesos de cada uma das palavras da sentença na instância de teste.
+    
+    
+		\begin{table}[h]
+		\caption{Tabela}
+		\label{tab: tabfreq3}
+		\centering
+		
+		\begin{tabular}{|c|c|c|} \hline
+			\textbf{Palavra} & \textbf{Peso (pos)} & \textbf{Peso (neg)}\\
+			\hline
+			cachorro & 0.25 & 0\\
+			amor & 0.38 & 0.33\\
+			mau & 0 & 0.16\\
+			gato & 0.13 & 0.5\\
+			amor & 0.38 & 0.33\\
+			\hline
+			Total & 1.14 & 1.32 \\
+			\hline
+			
+		\end{tabular}
+		
+	\end{table}	
 	
 	
 	% ----------------------------------------------------------

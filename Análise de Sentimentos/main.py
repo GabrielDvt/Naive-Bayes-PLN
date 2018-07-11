@@ -55,20 +55,7 @@ def treino():
 
     #comentário a comentário
     for i,tweet in np.ndenumerate(tweets):
-           
-        '''
-            Para cada palavra do comentario:
-            Colocar essas palavras em um vetor de palavras. Caso a palavra ainda não exista neste vetor, adicionar no vetor de palavras
-            e contabilizar se esta palavra é positiva, negativa ou nêutra, de acordo com a classificação
-            
-            Caso a palavra já exista no vetor (palavra repetida), verificar a classe dessa palavra e somar positivo, negativo ou nêutro
-
-            Ex: 
-            ['cobra', 'meu', 'mau] palavras
-            [0, 0, 0] positivas
-            [1, 0, 1] negativas
-            [0, 1, 0] nêutras
-        '''
+      
         for word in tweet.split():
             
             #remove aspas, dois pontos, vírgulas, etc
