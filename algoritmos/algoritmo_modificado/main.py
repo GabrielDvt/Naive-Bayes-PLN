@@ -23,13 +23,15 @@ import time
 
 #duas variaveis globais (serão utilizadas na função treino e teste)
 palavras = []
+pesos = []      #vetor que possui o peso de cada palavra
 labels = []
 
 def treino():
     start_time = time.time()
     print("Treinando...")
+    
     #lê o arquivo (treina com 7000 de um total de 8900 linhas)
-    dataset = pd.read_csv('tweets4.csv')
+    dataset = pd.read_csv('tweets.csv', nrows=7000)
     
     #busca o que são tweets e o que são classes
     tweets = dataset['Text'].values
@@ -54,20 +56,7 @@ def treino():
 
     #comentário a comentário
     for i,tweet in np.ndenumerate(tweets):
-           
-        '''
-            Para cada palavra do comentario:
-            Colocar essas palavras em um vetor de palavras. Caso a palavra ainda não exista neste vetor, adicionar no vetor de palavras
-            e contabilizar se esta palavra é positiva, negativa ou nêutra, de acordo com a classificação
-            
-            Caso a palavra já exista no vetor (palavra repetida), verificar a classe dessa palavra e somar positivo, negativo ou nêutro
-
-            Ex: 
-            ['cobra', 'meu', 'mau] palavras
-            [0, 0, 0] positivas
-            [1, 0, 1] negativas
-            [0, 1, 0] nêutras
-        '''
+      
         for word in tweet.split():
             
             #remove aspas, dois pontos, vírgulas, etc
@@ -130,12 +119,15 @@ def treino():
         
         #vetor probabilidades: contém a probabilidade de cada palavra aparecer na base de dados: P('love')
         probabilidades.append(soma / total)
-
+        
         #Probabilidade desta palavra aparecer e ser positiva (P('love'|positive))
         porcentagem_positiva = positivas[index] / total_positivos
 
         #Probabilidade desta palavra aparecer e ser negativa (P('love'|negative))
         porcentagem_negativa = negativas[index] / total_negativos
+
+        #Probabilidade desta palavra aparecer e ser neutra
+        porcentagem_neutra = neutras[index] / total_neutros
 
         #calculando:
         
@@ -145,28 +137,25 @@ def treino():
         #P(negative|'love') = P('love'|negative) * P(negative) / P('love')
         probabilidade_negativa = porcentagem_negativa * fracao_negativa / probabilidades[index]
 
-        #verifica qual probabilidade é maior e adiciona na label
+        #verifica qual probabilidade é maior e adiciona na label (Utiliza o algoritmo naive bayes)
+        #também 
         if (probabilidade_positiva > probabilidade_negativa):
             labels.append("Positivo")
+            pesos.append(porcentagem_positiva)      #porcentagem_positiva significa o peso desta palavra
         elif (probabilidade_negativa > probabilidade_positiva):
             labels.append("Negativo")
+            pesos.append(porcentagem_negativa)
         else:
             labels.append("Neutro")
+            pesos.append(porcentagem_neutra)
 
-        #print("Palavra: ", palavra, "\n P(pos) = " , fracao_positiva, "\n P(neg) = ", fracao_negativa, "\n P('palavra'): ", probabilidades[index], "\n P(pos|'palavra'): ", porcentagem_positiva, "\n P(neg|'palavra'): ", porcentagem_negativa)
-    print(palavras)
-    print(labels)
-    '''print("Treino finalizado.")
-    print('positivos', total_positivos)
-    print('negativos', total_negativos)
-    print('neutros', total_neutros)
-    '''
-    print('fracao_positiva', fracao_positiva * 100, "%")
-    print('fracao_negativa', fracao_negativa * 100, "%")
-    
-    #print('Vetor de probabilidades: ', probabilidades)
-    print("Tamanho: ", len(probabilidades))
+    print("Treino finalizado.")
+    print('Total de palavras positivas: ', total_positivos)
+    print('Total de palavras negativas: ', total_negativos)
+    print('Total de palavras neutras: ', total_neutros)
+    print('Total de paalvras classificadas: ', total_positivos + total_negativos + total_neutros)
     print("Tempo de execução: %s segundos" % (time.time() - start_time))
+    
     return
 
 def teste():
@@ -174,10 +163,10 @@ def teste():
     
     print("Testando...\n")
     
-    dataset = pd.read_csv('tweets4.csv')
+    dataset = pd.read_csv('tweets.csv')
 
     #pega 1700 frases aleatórias
-    sample = dataset.sample() #(sample)
+    sample = dataset.sample(n=1700) #(sample)
 
     #busca o que são tweets e o que são classes
     teste = sample['Text'].values
@@ -215,42 +204,42 @@ def teste():
             #remove as coisas desnecessárias
             palavra = re.sub(u'[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ\-\/ ]', '', palavra)
 
-            #verifica se essa palavra existe no treino
+            #caso a palavra já exista no treino
             if palavra in palavras:
                 #verifica o caráter dessa palavra no treino
                 index = palavras.index(palavra)
                 classificacao = labels[index]
-                if (classificacao == "Positivo"):
-                    cont_pos += 1
-                elif (classificacao == "Negativo"):
-                    cont_neg += 1
-                else:
-                    cont_neu += 1
+     
+                soma_pesos_pos = 0      #somatório dos pesos positivos
+                soma_pesos_neg = 0      #somatorio dos pesos negativos
+                soma_pesos_neu = 0
                 
-            #caso a palavra não exista no treino, então devemos atribuir a ela o valor de maior frequência no treino
-            #OBSERVAÇÃO: perguntar ao Sandrerley o que fazer com as palavras que não apareceram no treino
-            
-            #Implementar: conhecendo menos de 20% das palavras de uma frase, atribuir a essa frase a classificação mais frequente no treino.
-            #Se eu conhecer 20% das palavras e existir, nesta frase, uma palavra não conhecida, ignorá-la
-            #melhorias
-            
-            else:
-                #conta quantas são positivas
-                qtde_pos = labels.count("Positivo")
-                #conta quantas são negativas
-                qtde_neg = labels.count("Negativo")
-
-                if (qtde_pos > qtde_neg):
-                    cont_pos += 1
-                elif (qtde_neg > qtde_pos):
-                    cont_neg += 1
+                if (classificacao == "Positivo"):
+                    soma_pesos_pos += pesos[index]
+                elif (classificacao == "Negativo"):
+                    soma_pesos_neg += pesos[index]
                 else:
-                    cont_neu += 1
+                    soma_pesos_neu += pesos[index]
+                
+            
+            #caso a palavra não exista no treino, então devemos atribuir a ela o valor de maior frequência no treino
+            #else:
+                #conta quantas são positivas
+                #qtde_pos = labels.count("Positivo")
+                #conta quantas são negativas
+                #qtde_neg = labels.count("Negativo")
+
+                #if (qtde_pos > qtde_neg):
+                 #   cont_pos += 1
+                #elif (qtde_neg > qtde_pos):
+                #    cont_neg += 1
+                #else:
+                 #   cont_neu += 1
                 
         #verifica os contadores e decide se a frase é pos, neg, ou neu
-        if (cont_pos > cont_neg) and (cont_pos > cont_neu):
+        if (soma_pesos_pos > soma_pesos_neg and soma_pesos_pos > soma_pesos_neu):
             resultado.append("Positivo")
-        elif (cont_neg > cont_pos) and (cont_neg > cont_neu):
+        elif(soma_pesos_neg > soma_pesos_pos and soma_pesos_neg > soma_pesos_neu):
             resultado.append("Negativo")
         else:
             resultado.append("Neutro")
@@ -266,23 +255,13 @@ def teste():
     print("Erros: ", ((a != b).sum() * 100 / len(resultado)), "%")
     return
 
-    #verifica falsos positivos, falsos negativos e calcula a precisão do método
-    '''for index, res in enumerate(resultado):
-        if (res == "Positivo") and (res == classes[index]):
-            tp += 1
-        elif (res == "Positivo") and (res != classes[index]):
-            fp += 1
-        elif (res == "Negativo") and (res == classes[index]):
-            tn += 1
-        elif (res == "Negativo") and (res != classes[index]):
-            fn += 1'''
     
 
+#roda o algoritmo
 treino()
+teste()
     
-#    print("Palavra: ", palavra)
- #   print("Prob. Pos: ", prob_positiva)
-  #  print("Prob. Neg: ", prob_negativa, "\n")
+
 
 
 '''print('positivos', total_positivos)
@@ -292,6 +271,15 @@ print('fracao_positiva', fracao_positiva)
 print('fracao_negativa', fracao_negativa)
 print('Vetor de probabilidades: ', probabilidades)'''
 
+'''for index, res in enumerate(resultado):
+        if (res == "Positivo") and (res == classes[index]):
+            tp += 1
+        elif (res == "Positivo") and (res != classes[index]):
+            fp += 1
+        elif (res == "Negativo") and (res == classes[index]):
+            tn += 1
+        elif (res == "Negativo") and (res != classes[index]):
+            fn += 1'''
 
 '''
 Melhorias:
