@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.7.10)  11 JUL 2018 16:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.7.10)  12 JUL 2018 14:18
 entering extended mode
 **./Trabalho.tex
 (Trabalho.tex
@@ -1952,11 +1952,7 @@ sty"
 \WF@box=\box94
 \WF@everypar=\toks53
 Package: wrapfig 2003/01/31  v 3.6
-) (Trabalho.aux
-
-LaTeX Warning: Label `fig: teste1' multiply defined.
-
-)
+) (Trabalho.aux)
 \openout1 = `Trabalho.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 197.
@@ -1976,12 +1972,13 @@ LaTeX Font Info:    ... okay on input line 197.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 197.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 197.
 
- ("C:\Users\Gabriel\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+
+("C:\Users\Gabriel\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 197.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 197.
- ("C:\Users\Gabriel\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
+("C:\Users\Gabriel\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box95
@@ -2151,17 +2148,23 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Underfull \vbox (badness 1968) has occurred while \output is active []
 
  [5]
-<teste1.png, id=74, 503.63156pt x 535.2497pt>
+<teste1.png, id=74, 297.36093pt x 60.225pt>
 File: teste1.png Graphic file (type png)
 <use teste1.png>
 Package pdftex.def Info: teste1.png  used on input line 470.
-(pdftex.def)             Requested size: 503.63033pt x 535.24838pt.
+(pdftex.def)             Requested size: 297.3602pt x 60.22484pt.
 
-Overfull \hbox (77.63033pt too wide) in paragraph at lines 470--471
+[6 <./treino.png>]
+<pseudocodigo1.png, id=84, 520.19344pt x 411.03563pt>
+File: pseudocodigo1.png Graphic file (type png)
+<use pseudocodigo1.png>
+Package pdftex.def Info: pseudocodigo1.png  used on input line 510.
+(pdftex.def)             Requested size: 520.19215pt x 411.03462pt.
+
+Overfull \hbox (94.19215pt too wide) in paragraph at lines 510--511
  [][] 
  []
 
-[6 <./treino.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -2169,28 +2172,24 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] [9]
-<melhoria1.png, id=114, 502.12593pt x 536.0025pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8 <./pseudocodigo1.png>] [9]
+<melhoria1.png, id=114, 298.11375pt x 60.225pt>
 File: melhoria1.png Graphic file (type png)
 <use melhoria1.png>
-Package pdftex.def Info: melhoria1.png  used on input line 590.
-(pdftex.def)             Requested size: 502.12471pt x 536.00119pt.
+Package pdftex.def Info: melhoria1.png  used on input line 600.
+(pdftex.def)             Requested size: 298.11302pt x 60.22484pt.
+<pseudocodigo2.png, id=115, 522.45187pt x 421.575pt>
+File: pseudocodigo2.png Graphic file (type png)
+<use pseudocodigo2.png>
+Package pdftex.def Info: pseudocodigo2.png  used on input line 633.
+(pdftex.def)             Requested size: 522.45059pt x 421.57396pt.
 
-Overfull \hbox (76.12471pt too wide) in paragraph at lines 590--591
+Overfull \hbox (96.45059pt too wide) in paragraph at lines 633--634
  [][] 
  []
-
-File: teste1.png Graphic file (type png)
-<use teste1.png>
-Package pdftex.def Info: teste1.png  used on input line 599.
-(pdftex.def)             Requested size: 503.63033pt x 535.24838pt.
-
-Overfull \hbox (77.63033pt too wide) in paragraph at lines 599--600
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -2201,28 +2200,28 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 bibitemlist
-[11]) [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 638.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 638.
+) [11 <./pseudocodigo2.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 653.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 653.
  (Trabalho.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 638.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 638.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 653.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 653.
 Package rerunfilecheck Info: File `Trabalho.brf' has not changed.
 (rerunfilecheck)             Checksum: 3F646D3258A67486855CA884C1425032;56.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 638.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 653.
  ) 
 Here is how much of TeX's memory you used:
- 34793 strings out of 492973
- 639352 string characters out of 3125806
- 863592 words of memory out of 3000000
- 38022 multiletter control sequences out of 15000+200000
+ 34811 strings out of 492973
+ 639670 string characters out of 3125806
+ 863678 words of memory out of 3000000
+ 38035 multiletter control sequences out of 15000+200000
  619184 words of font info for 123 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 52i,12n,63p,961b,569s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 52i,12n,63p,961b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mat
 hex.enc}{C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
 lm-mathsy.enc}{C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
@@ -2243,9 +2242,9 @@ b><C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lms
 s17.pfb><C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
 lm/lmsy10.pfb><C:/Users/Gabriel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/lm/lmsy8.pfb>
-Output written on Trabalho.pdf (12 pages, 322670 bytes).
+Output written on Trabalho.pdf (11 pages, 341519 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
- 50 named destinations out of 1000 (max. 500000)
- 28300 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 53 named destinations out of 1000 (max. 500000)
+ 28334 words of extra memory for PDF output out of 29859 (max. 10000000)
 

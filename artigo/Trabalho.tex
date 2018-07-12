@@ -502,6 +502,16 @@ twoside
 		
 		O tempo de execução dependerá das configurações da sua CPU ou GPU, mas não é um fator limitante para essa quantidade de dados, visto que a média de 12.45 segundos não é um tempo preocupante.
 		
+		\subsection{Pseudocódigo}
+		O pseudo-código do nosso algoritmo está ilustrado na figura abaixo:
+		\begin{figure}[h!]
+			\centering
+			\caption{Pseudocódigo do algoritmo}
+			\includegraphics[scale=1]{pseudocodigo1.png}
+			\fonte{Próprio autor}
+			\label{fig: pseudocodigo}
+		\end{figure}
+		
 		
 	\section{Melhorias no método}
 	\label{melhorias}
@@ -593,14 +603,6 @@ twoside
 	\end{figure}
 
 
-		\begin{figure}[h!]
-		\centering
-		\caption{Execução de um dos testes}
-		\includegraphics[scale=1]{teste1.png}
-		\fonte{Próprio autor}
-		\label{fig: teste1}
-	\end{figure}
-	
 	\begin{table}[!h]
 		\caption{Resultados dos testes realizados com o algoritmo melhorado}
 		\label{tab: testes2}
@@ -623,7 +625,22 @@ twoside
 		
 	\end{table}
 	
+	\subsection{Pseudocódigo}
+	O pseudo-código do nosso algoritmo está ilustrado na figura abaixo:
+	\begin{figure}[h!]
+		\centering
+		\caption{Pseudocódigo do algoritmo melhorado}
+		\includegraphics[scale=1]{pseudocodigo2.png}
+		\fonte{Próprio autor}
+		\label{fig: pseudocodigo2}
+	\end{figure}
 	
+	\section{Conclusão}
+	Concluímos que método probabilístico Naive Bayes é eficiente na análise de sentimentos do tipo polar.
+	
+	Os resultados obtidos no experimento foram satisfatórios (média de 83.06\% de acerto) dentro de uma base de dados com 8199 frases, totalizando 1412 acertos. 
+	
+	Concluímos também que se nós levarmos em consideração o peso positivo, negativo ou neutro de cada palavra, os resultados se aproximam da realidade e teremos uma média de acertos um pouco maior do que o algoritmo original. A média de acertos passou a ser 89.15\%.
 	
 	% ----------------------------------------------------------
 	% Referências bibliográficas
