@@ -1,0 +1,17 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: beamer.aux
+The style file: amsalpha.bst
+Illegal, another \bibstyle command---line 96 of file beamer.aux
+ : \bibstyle
+ :          {abntex2-alf}
+I'm skipping whatever remains of this command
+Database file #1: abntex2-options.bib
+Warning--entry type for "abnt-emphasize=bf" isn't style-file defined
+--line 29 of file abntex2-options.bib
+Warning--entry type for "abnt-url-package=url" isn't style-file defined
+--line 199 of file abntex2-options.bib
+Database file #2: referencias.bib
+Warning--entry type for "WinNT" isn't style-file defined
+--line 1 of file referencias.bib
+Warning--all relevant fields are empty in abnt-url-package=url
+Warning--all relevant fields are empty in abnt-emphasize=bf
+(There was 1 error message)
