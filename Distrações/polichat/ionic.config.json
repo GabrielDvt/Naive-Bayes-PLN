@@ -1,7 +1,0 @@
-{
-  "name": "polichat",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
